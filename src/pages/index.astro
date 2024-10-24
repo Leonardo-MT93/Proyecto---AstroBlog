@@ -1,9 +1,13 @@
 ---
-import BlogPost from "../components/BlogPost.astro";
+// import BlogPost from "../components/BlogPost.astro";
+import { getCollection } from "astro:content";
 import { siteConfig } from "../config/site-config";
 import MainLayout from "../layouts/MainLayout.astro";
+import TypedBlogPost from "src/components/TypedBlogPost.astro";
 
-const posts = await Astro.glob('./posts/*.{md,mdx}')
+const blogPost = await getCollection("blog");
+
+
 ---
 
 <MainLayout title="Leonino's Blog">
@@ -12,16 +16,15 @@ const posts = await Astro.glob('./posts/*.{md,mdx}')
     <div class="container px-6 py-10 mx-auto">
         <h1 class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">{siteConfig.title}</h1>
 
-        <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+        <!-- <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
 			{
 				posts.map((post) =>  <BlogPost {...post}/>)
 			}
-			<!-- <BlogPost paragraph="How to use sticky note for problem solving" img="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"/>	
-			<BlogPost paragraph="Morning routine to boost your mood" img="https://images.unsplash.com/photo-1497032628192-86f99bcd76bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"/>
-			<BlogPost paragraph="All the features you want to know" img="https://images.unsplash.com/photo-1530099486328-e021101a494a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1547&q=80"/>
-			<BlogPost paragraph="Minimal workspace for your inspirations" img="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1484&q=80"/>
-			<BlogPost paragraph="What do you want to know about Blockchane" img="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"/>
-			<BlogPost paragraph="How to use sticky note for problem solving" img="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"/>	 -->
+        </div> -->
+        <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+			{
+				blogPost.map((post) =>  <TypedBlogPost post={post}/>)
+			}
         </div>
     </div>
 </section>

@@ -3,6 +3,13 @@ import { Formatter } from '@utils/formatter.ts';
 interface Props {
     paragraph?: string;
     img?: string;
+    frontmatter: {
+        title: string;
+        description: string;
+        date: Date;
+        image: string;
+    };
+    url: string;
 }
 const { frontmatter, url} = Astro.props;
 
